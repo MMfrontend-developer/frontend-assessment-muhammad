@@ -20,12 +20,22 @@ export function SearchInput({
   const initialValue = searchParams.get("q") ?? "";
   
   const [value, setValue] = useState(initialValue);
+  const [prevQ, setPrevQ] = useState(initialValue);
   const debouncedValue = useDebounce(value, 400);
   const [isPending, startTransition] = useTransition();
 
+  // If the query param changes externally, we need to update our local state
+  if (initialValue !== prevQ) {
+    setPrevQ(initialValue);
+    setValue(initialValue);
+  }
+
   useEffect(() => {
     const currentQ = searchParams.get("q") ?? "";
-    if (debouncedValue === currentQ) return;
+    
+    // Stop the debounce cycle from re-applying old state if we've already synced with the URL
+    // (e.g., when clicking "Clear all filters" or navigating to "/")
+    if (debouncedValue === currentQ || value === currentQ) return;
 
     const params = new URLSearchParams(searchParams.toString());
     if (debouncedValue) {
@@ -38,7 +48,7 @@ export function SearchInput({
     startTransition(() => {
       router.push(`/?${params.toString()}`);
     });
-  }, [debouncedValue, router, searchParams]);
+  }, [debouncedValue, router, searchParams, value]);
 
   const clearSearch = () => {
     setValue("");
