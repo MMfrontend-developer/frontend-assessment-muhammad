@@ -92,4 +92,4 @@ I deliberately chose to stick with **Vercel** for the deployment of this assessm
 - **Styling**: Tailwind CSS v4 (No component libraries used!)
 - **Testing**: Vitest + React Testing Library
 
-I had an absolute blast building this. Thanks for your time reviewing my code.! 
+I had an absolute blast building this. Thanks for your time reviewing my code! 

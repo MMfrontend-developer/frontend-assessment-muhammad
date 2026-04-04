@@ -43,7 +43,7 @@ export function Pagination({ totalItems, limit }: PaginationProps) {
       <button
         disabled={currentPage === totalPages}
         onClick={() => handlePageChange(currentPage + 1)}
-        className="flex h-10 w-10 items-center justify-center rounded-full bg-zinc-900 text-zinc-400 Transition-all hover:bg-zinc-800 hover:text-white disabled:cursor-not-allowed disabled:opacity-30"
+        className="flex h-10 w-10 items-center justify-center rounded-full bg-zinc-900 text-zinc-400 transition-all hover:bg-zinc-800 hover:text-white disabled:cursor-not-allowed disabled:opacity-30"
       >
         <ChevronRight className="h-5 w-5" />
       </button>
